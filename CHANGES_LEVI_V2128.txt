@@ -1,0 +1,23 @@
+LEVI SPACE v2.128 (vc=228) - 2026-11-09 - FULL PAYLOAD RE-CODE (all 16 modules)
+
+- Complete clean re-code of research/menu_src/payload/modules/ (16/16):
+  config, names, main, game_api, catalog, weapon, equip, esp, display,
+  striker_skin, unlocks, kills, scopesync, cosmetics, melee, rpcs.
+  Rebuilt honestly from the runtime dump ground truth; the broken
+  legacy code was rewritten, not patched. One standard everywhere, no
+  dead/dummy placeholders, dump-MISSING APIs removed (not guarded).
+- Every module validated: AST parity vs zip oracle (MISSING=0/added=0),
+  dual-exec smoke ALL-EQUAL, final build
+  research/menu_src/payload/skins_payload.py (43,638 lines) COMPILE_OK.
+- Wire contract preserved (ports 50000-50007; SkinInfoSync.h BEGIN/C|/W|/S|/NP|/O|/END).
+- Cross-module seams verified: STRIKER_PENDING (rpcs-owned, called by cosmetics),
+  ensure_item/local_equip/melee_guid_present/safe_game_thread, duplicate
+  top-level names (_v841_skin_ids, _v842g_*, _fx_mirror_case, _v842g_install,
+  _v218m_panel_invoke@rpcs:6985) preserved for exec-order parity.
+- Theme unchanged (Paper kPortThemes[15], iTheme=15/iBgMode=4, bDefaultsV126,
+  bMenuColorsCustom). Icon rebranded to Zenitsu artwork via zenitsu_rebrand.py.
+- Supersedes the earlier v2.128 "round 1" (config.py + main.py only). This
+  is the complete re-code release.
+- SHA256 apk: see LEVI_V2128_SHA256.txt
+- Device evidence required before claiming any transport works
+  ("on device u will get logs").
